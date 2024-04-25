@@ -1,0 +1,10 @@
+.btn-edit {
+    margin-left: 10px;
+}
+
+@media (width < 768px) {
+    .btn-edit {
+        margin-left: 0px;
+        margin-top: 10px;
+    }   
+}

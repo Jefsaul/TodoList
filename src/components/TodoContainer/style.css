@@ -1,0 +1,17 @@
+.container {
+    background-color: #ECECF5;
+    border-radius: 10px;
+}
+.noFoundContainer{
+    padding-block: 15px;
+}
+.noFound {
+    display: inline-block;
+    padding-inline: 10px;
+    padding-block: 5px;
+    margin-top: 100px;
+    border-radius: 15px;
+    background-color: #DDDEE0;
+    text-align: center;
+    color: gray;
+}

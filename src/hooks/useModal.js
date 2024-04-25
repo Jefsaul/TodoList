@@ -2,9 +2,9 @@ import { useState, useCallback } from "react";
 
 const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [modalData, setModalData] = useState({});
+  const [modalData, setModalData] = useState([]);
 
-  const openModal = useCallback((data = {}) => {
+  const openModal = useCallback((data = []) => {
     setModalData(data);
     setIsOpen(true);
   }, []);

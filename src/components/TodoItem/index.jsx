@@ -3,10 +3,39 @@ import { Delete, Edit } from "@mui/icons-material";
 import { Button, Card, Checkbox, Grid, Typography } from "@mui/material";
 import useModal from "../../hooks/useModal";
 import ModalUpdate from "../Modals/ModalUpdate";
+import { showLoading, showSuccess } from "../Alerts";
+import Swal from "sweetalert2";
+import { deleteTask } from "../../APIs/apiFunctions";
+import './style.css'
 
-const TodoItem = () => {
+const TodoItem = ({ item }) => {
+  const { isOpen, openModal, modalData, closeModal } = useModal();
+  const textStyle = {
+    textDecoration: item.task_status === "Complete" ? "line-through" : "none",
+    color: item.task_status === "Complete" ? "gray" : "inherit",
+  };
 
-  const { isOpen, openModal, closeModal } = useModal();
+  const handlePost = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        showLoading();
+
+        const delTask = await deleteTask(id);
+        if (delTask) {
+          Swal.close;
+          showSuccess("Succesful", "Task deleated successfully");
+        }
+      }
+    });
+  };
 
   return (
     <>
@@ -15,23 +44,33 @@ const TodoItem = () => {
           <Card style={{ marginBlock: 5 }}>
             <div style={{ paddingBlock: 15 }}>
               <Grid container alignItems="center">
-                <Grid item xs={1}>
-                  <Checkbox defaultChecked size="large" />
+                <Grid item md={1} xs={2}>
+                  <Checkbox
+                    checked={item.task_status == "Incomplete" ? false : true}
+                    onClick={(e) => e.preventDefault()}
+                    style={{ pointerEvents: "none" }}
+                    size="large"
+                  />
                 </Grid>
-                <Grid item xs={8} style={{ textAlign: "left" }}>
-                  <Typography>Complete the vue js course udemy</Typography>
-                  <Typography>2024</Typography>
+                <Grid item md={8} xs={7} style={{ textAlign: "left" }}>
+                  <Typography style={textStyle}>{item.title_task}</Typography>
+                  <Typography color="gray">{item.create_timestamp}</Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Button variant="contained" size="small" color="inherit">
+                  <Button
+                    onClick={() => handlePost(item.id_task)}
+                    variant="contained"
+                    size="small"
+                    color="inherit"
+                  >
                     <Delete fontSize="small" />
                   </Button>
                   <Button
                     variant="contained"
                     size="small"
                     color="inherit"
-                    style={{ marginLeft: 10 }}
-                    onClick={openModal}
+                    className="btn-edit"
+                    onClick={() => openModal(item)}
                   >
                     <Edit fontSize="small" />
                   </Button>
@@ -41,7 +80,7 @@ const TodoItem = () => {
           </Card>
         </Grid>
       </Grid>
-      <ModalUpdate open={isOpen} handleClose={closeModal}/>
+      <ModalUpdate open={isOpen} handleClose={closeModal} data={modalData} />
     </>
   );
 };

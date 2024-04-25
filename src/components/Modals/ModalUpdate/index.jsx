@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Close } from "@mui/icons-material";
 import {
   Box,
@@ -9,26 +9,56 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { style } from "../styles/ModalStyle";
+import { showLoading, showSuccess } from "../../Alerts";
+import { updateTask } from "../../../APIs/apiFunctions";
+import Swal from "sweetalert2";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "0px solid #fff",
-  borderRadius: "15px",
-  boxShadow: 24,
-  p: 4,
-};
+const ModalUpdate = ({ open, handleClose, data }) => {
+  const [inputState, setInputState] = useState({
+    item_id: "",
+    title: "",
+    status: "",
+  });
 
-const ModalUpdate = ({ open, handleClose }) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setInputState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    if (data) {
+      const { id_task, title_task, task_status } = data;
+      setInputState({
+        item_id: id_task,
+        title: title_task,
+        status: task_status || "Incomplete",
+      });
+    }
+  }, [data]);
+
+  const handlePost = async (e) => {
+    showLoading();
+
+    const { item_id, title, status } = inputState;
+
+    try {
+      const upTask = await updateTask(item_id, title, status);
+
+      if (upTask) {
+        Swal.close;
+        showSuccess("Succesful", "Task updated successfully");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <Modal
-      open={open}
-      aria-labelledby="modal-modal-title"
-    >
+    <Modal open={open} aria-labelledby="modal-modal-title">
       <Box sx={style}>
         <Grid container alignItems="center">
           <Grid item xs={6}>
@@ -48,6 +78,9 @@ const ModalUpdate = ({ open, handleClose }) => {
           </Grid>
           <Grid item xs={12} style={{ paddingTop: 20 }}>
             <TextField
+              name="title"
+              value={inputState.title}
+              onChange={handleInputChange}
               label="Title"
               variant="outlined"
               style={{ width: "100%" }}
@@ -55,6 +88,9 @@ const ModalUpdate = ({ open, handleClose }) => {
           </Grid>
           <Grid item xs={12} style={{ paddingTop: 20 }}>
             <TextField
+              name="status"
+              value={inputState.status}
+              onChange={handleInputChange}
               label="Status"
               variant="outlined"
               select
@@ -65,7 +101,11 @@ const ModalUpdate = ({ open, handleClose }) => {
             </TextField>
           </Grid>
           <Grid item xs={12} style={{ paddingTop: 25 }}>
-            <Button style={{ marginRight: 15 }} variant="contained">
+            <Button
+              onClick={handlePost}
+              style={{ marginRight: 15 }}
+              variant="contained"
+            >
               Update Task
             </Button>
             <Button onClick={handleClose} variant="contained" color="inherit">
