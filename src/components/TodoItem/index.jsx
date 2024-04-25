@@ -6,7 +6,7 @@ import ModalUpdate from "../Modals/ModalUpdate";
 import { showLoading, showSuccess } from "../Alerts";
 import Swal from "sweetalert2";
 import { deleteTask } from "../../APIs/apiFunctions";
-import './style.css'
+import './item-style.css'
 
 const TodoItem = ({ item }) => {
   const { isOpen, openModal, modalData, closeModal } = useModal();
