@@ -9,11 +9,12 @@ Este proyecto es una aplicación TodoList desarrollada utilizando React JS con V
 - **Eliminar Tareas:** Las tareas pueden ser eliminadas individualmente.
 - **Filtrar Tareas:** Las tareas pueden ser filtradas por su estado: Todas, Completadas o Incompletas.
 
-## Tecnologías Utilizadas
+## Tecnologías Utilizadas 
 - **React JS:** Framework frontend para construir la interfaz de usuario.
 - **Vite:** Herramienta de construcción moderna que proporciona una experiencia de desarrollo más rápida.
 - **Node.js:** Entorno de ejecución para JavaScript en el servidor, utilizado para diversas herramientas de desarrollo.
-
+- **Python:** Lenguaje de programación utilizado para desarrollar Lambdas en AWS.
+  
 ## Requisitos Previos
 Para ejecutar este proyecto, necesitarás tener Node.js (v20.11.1 o superior) instalado en tu sistema. Puedes descargarlo desde [Node.js official website](https://nodejs.org/).
 
