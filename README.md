@@ -40,5 +40,5 @@ Para poner en marcha el proyecto en tu entorno local, sigue los siguientes pasos
 - **Eliminar una tarea:** Haz clic en el botón 'Eliminar' para remover una tarea de la lista.
 - **Filtrar tareas:** Selecciona un filtro de estado en la parte superior de la interfaz para ajustar las tareas que deseas visualizar.
 
-## Link personalizado utilizando vercel
+## Link personalizado utilizando Vercel
 [URL de TodoList](https://todo-list-five-khaki-75.vercel.app/)
