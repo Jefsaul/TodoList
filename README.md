@@ -31,8 +31,8 @@ Para poner en marcha el proyecto en tu entorno local, sigue los siguientes pasos
 3. **Iniciar el servidor de desarrollo:**
     ```
     npm run dev
-    Este comando lanzará el servidor de desarrollo y abrirá la aplicación en 
-    http://localhost:3000 en tu navegador predeterminado.
+  Este comando lanzará el servidor de desarrollo y abrirá la aplicación en 
+  http://localhost:3000 en tu navegador predeterminado.
 
 ## Uso
 - **Agregar una tarea:** Haz clic en el botón 'Add Task' y rellena la información requerida.
