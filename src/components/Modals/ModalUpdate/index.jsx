@@ -52,6 +52,9 @@ const ModalUpdate = ({ open, handleClose, data }) => {
       if (upTask) {
         Swal.close;
         showSuccess("Succesful", "Task updated successfully");
+      } else {
+        Swal.close;
+        showError('Error', 'An error occurred while updating the record')
       }
     } catch (error) {
       console.log(error);

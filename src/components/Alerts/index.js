@@ -27,7 +27,18 @@ const showSuccess = (title, text) => {
   });
 };
 
+const showError = (title, text) => {
+  Swal.fire({
+    icon: "error",
+    title: title,
+    text: text,
+    confirmButtonText: "Aceptar",
+    allowOutsideClick: false,
+  });
+};
+
 export {
     showLoading,
-    showSuccess
+    showSuccess,
+    showError
 }

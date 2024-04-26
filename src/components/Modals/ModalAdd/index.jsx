@@ -40,6 +40,9 @@ const ModalAdd = ({ open, handleClose }) => {
       if (addTask) {
         Swal.close;
         showSuccess("Succesful", "Task created successfully");
+      } else {
+        Swal.close;
+        showError("Error", "An error occurred while creating the record");
       }
     } catch (error) {
       console.log(error);

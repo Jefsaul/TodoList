@@ -3,10 +3,10 @@ import { Delete, Edit } from "@mui/icons-material";
 import { Button, Card, Checkbox, Grid, Typography } from "@mui/material";
 import useModal from "../../hooks/useModal";
 import ModalUpdate from "../Modals/ModalUpdate";
-import { showLoading, showSuccess } from "../Alerts";
+import { showError, showLoading, showSuccess } from "../Alerts";
 import Swal from "sweetalert2";
 import { deleteTask } from "../../APIs/apiFunctions";
-import './item-style.css'
+import "./item-style.css";
 
 const TodoItem = ({ item }) => {
   const { isOpen, openModal, modalData, closeModal } = useModal();
@@ -32,6 +32,8 @@ const TodoItem = ({ item }) => {
         if (delTask) {
           Swal.close;
           showSuccess("Succesful", "Task deleated successfully");
+        } else {
+          showError('Error', 'An error occurred while deleting the record')
         }
       }
     });
